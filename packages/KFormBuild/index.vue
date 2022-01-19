@@ -52,7 +52,7 @@ export default {
       type: Object,
       required: true
     },
-    dynamicData: {
+    dynamicdata: {
       type: Object,
       default: () => {
         return {};
@@ -66,11 +66,11 @@ export default {
       type: Boolean,
       default: false
     },
-    outputString: {
+    outputstring: {
       type: Boolean,
       default: false
     },
-    defaultValue: {
+    defaultvalue: {
       type: Object,
       default: () => ({})
     }
@@ -80,9 +80,9 @@ export default {
   },
   computed: {
     getDynamicData() {
-      return typeof this.dynamicData === "object" &&
-        Object.keys(this.dynamicData).length
-        ? this.dynamicData
+      return typeof this.dynamicdata === "object" &&
+        Object.keys(this.dynamicdata).length
+        ? this.dynamicdata
         : window.$kfb_dynamicData || {};
     }
   },
@@ -117,10 +117,10 @@ export default {
                 reject(err);
               }
             });
-            if (this.outputString) {
+            if (this.outputstring) {
               // 需要所有value转成字符串
-              for (const key in values) {
-                const type = typeof values[key];
+              for (let key in values) {
+                let type = typeof values[key];
                 if (type === "string" || type === "undefined") {
                   continue;
                 } else if (type === "object") {
@@ -137,7 +137,6 @@ export default {
             }
           });
         } catch (err) {
-          console.error(err);
           reject(err);
         }
       });
@@ -145,13 +144,13 @@ export default {
     setData(json) {
       return new Promise((resolve, reject) => {
         try {
-          if (this.outputString) {
+          if (this.outputstring) {
             // 将非string数据还原
-            for (const key in json) {
+            for (let key in json) {
               if (!json[key].startsWith("k-form-design#")) {
                 continue;
               }
-              const array = json[key].split("#");
+              let array = json[key].split("#");
               if (array[1] === "object") {
                 json[key] = JSON.parse(array[2]);
               } else if (array[1] === "number") {
@@ -164,9 +163,7 @@ export default {
           } else {
             this.form.setFieldsValue(json);
           }
-          resolve(true);
         } catch (err) {
-          console.error(err);
           reject(err);
         }
       });
@@ -180,7 +177,7 @@ export default {
       const traverse = array => {
         array.forEach(element => {
           if (fields.has(element.model)) {
-            this.$set(element.options, optionName, value);
+            element.options[optionName] = value;
           }
           if (element.type === "grid" || element.type === "tabs") {
             // 栅格布局 and 标签页
@@ -225,7 +222,7 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      this.setData(this.defaultValue);
+      this.setData(this.defaultvalue);
     });
   }
 };

@@ -3,7 +3,7 @@
  * @Author: kcz
  * @Date: 2020-01-02 22:41:48
  * @LastEditors: kcz
- * @LastEditTime: 2021-05-14 19:09:25
+ * @LastEditTime: 2021-03-02 19:14:18
  */
 
 // 解决Chrome控制台non-passive event listener输出问题
@@ -47,9 +47,9 @@ if (typeof window !== "undefined" && window.Vue) {
  * @return: Boolean
  */
 function setFormDesignConfig(config) {
-  if (!config || typeof config !== "object") {
+  if (!config) {
     console.error("传入config的参数必须为对象");
-    return false;
+    return;
   }
   try {
     customComponents.title = config.title || "自义定组件";
@@ -58,30 +58,28 @@ function setFormDesignConfig(config) {
     window.$customComponentList = config.list || [];
     // uploadFile 配置 start
     // 配置uploadFile默认上传地址
-    const uploadFile = basicsList.filter(item => item.type === "uploadFile")[0];
-    uploadFile.options.action =
+    basicsList[10].options.action =
       config.uploadFile || "http://cdn.kcz66.com/uploadFile.txt";
 
     // 配置uploadFile默认额外参数
-    uploadFile.options.data = JSON.stringify(config.uploadFileData || {});
+    basicsList[10].options.data = JSON.stringify(config.uploadFileData || {});
 
     // 配置uploadFile默认name
-    uploadFile.options.fileName = config.uploadFileName || "file";
+    basicsList[10].options.fileName = config.uploadFileName || "file";
     // 配置uploadFile默认headers
-    uploadFile.options.headers = config.uploadFileHeaders || {};
+    basicsList[10].options.headers = config.uploadFileHeaders || {};
     // uploadFile 配置 end
 
     // uploadImage配置 start
     // 配置uploadImage默认上传地址
-    const uploadImg = basicsList.filter(item => item.type === "uploadImg")[0];
-    uploadImg.options.action =
+    basicsList[11].options.action =
       config.uploadImage || "http://cdn.kcz66.com/upload-img.txt";
     // 配置uploadImage默认额外参数
-    uploadImg.options.data = JSON.stringify(config.uploadImageData || {});
+    basicsList[11].options.data = JSON.stringify(config.uploadImageData || {});
     // 配置uploadFile默认name
-    uploadImg.options.fileName = config.uploadImageName || "image";
+    basicsList[11].options.fileName = config.uploadImageName || "image";
     // 配置uploadFile默认headers
-    uploadImg.options.headers = config.uploadImageHeaders || {};
+    basicsList[11].options.headers = config.uploadImageHeaders || {};
     // uploadImage配置 end
 
     return true;
@@ -97,9 +95,9 @@ function setFormDesignConfig(config) {
  * @param { object }config
  */
 function setFormBuildConfig(config) {
-  if (!config || typeof config !== "object") {
+  if (!config) {
     console.error("传入setFormBuildConfig的参数必须为对象");
-    return false;
+    return;
   }
   if (config.dynamicData) {
     window.$kfb_dynamicData = config.dynamicData;
@@ -108,7 +106,6 @@ function setFormBuildConfig(config) {
 
 // 这里可以用es6的解构语法导入组件
 export {
-  install,
   KFormDesign,
   KFormBuild,
   KFormItem,
@@ -121,6 +118,5 @@ export {
 export default {
   install,
   setConfig: setFormDesignConfig,
-  setFormDesignConfig: setFormDesignConfig,
   setFormBuildConfig: setFormBuildConfig
 };

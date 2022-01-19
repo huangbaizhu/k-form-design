@@ -3,7 +3,7 @@
  * @Author: kcz
  * @Date: 2020-03-17 12:53:50
  * @LastEditors: kcz
- * @LastEditTime: 2021-05-05 12:12:39
+ * @LastEditTime: 2020-06-08 21:05:39
  -->
 <template>
   <div
@@ -83,8 +83,7 @@ export default {
     optionsData() {
       try {
         return JSON.parse(this.record.options.data);
-      } catch (err) {
-        console.error(err);
+      } catch {
         return {};
       }
     }

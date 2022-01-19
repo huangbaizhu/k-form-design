@@ -1,31 +1,9 @@
-<!--
- * @Descripttion: 
- * @Author: kcz
- * @Date: 2021-05-02 16:04:02
- * @LastEditors: kcz
- * @LastEditTime: 2021-05-14 21:24:50
--->
 <template>
   <a-form-item
     :label="record.label"
-    :label-col="
-      formConfig.layout === 'horizontal'
-        ? formConfig.labelLayout === 'flex'
-          ? { style: `width:${formConfig.labelWidth}px` }
-          : formConfig.labelCol
-        : {}
-    "
+    :label-col="formConfig.layout === 'horizontal' ? formConfig.labelCol : {}"
     :wrapper-col="
-      formConfig.layout === 'horizontal'
-        ? formConfig.labelLayout === 'flex'
-          ? { style: 'width:auto;flex:1' }
-          : formConfig.wrapperCol
-        : {}
-    "
-    :style="
-      formConfig.layout === 'horizontal' && formConfig.labelLayout === 'flex'
-        ? { display: 'flex' }
-        : {}
+      formConfig.layout === 'horizontal' ? formConfig.wrapperCol : {}
     "
   >
     <component
@@ -57,7 +35,7 @@ export default {
   computed: {
     customComponent() {
       // 计算需要显示的组件
-      const customComponentList = {};
+      let customComponentList = {};
       if (window.$customComponentList) {
         // 将数组映射成json
         window.$customComponentList.forEach(item => {

@@ -16,14 +16,14 @@ export const basicsList = [
       placeholder: "请输入", // 没有输入时，提示文字
       clearable: false,
       maxLength: null,
-      addonBefore: "",
-      addonAfter: "",
       hidden: false, // 是否隐藏，false显示，true隐藏
       disabled: false // 是否禁用，false不禁用，true禁用
     },
     model: "", // 数据字段
     key: "",
     help: "",
+    prefix: "",
+    suffix: "",
     rules: [
       //验证规则
       {
@@ -75,6 +75,8 @@ export const basicsList = [
     model: "", // 数据字段
     key: "",
     help: "",
+    prefix: "",
+    suffix: "",
     rules: [
       {
         required: false,
@@ -112,6 +114,8 @@ export const basicsList = [
     model: "",
     key: "",
     help: "",
+    prefix: "",
+    suffix: "",
     rules: [
       {
         required: false,
@@ -384,6 +388,8 @@ export const basicsList = [
     model: "",
     key: "",
     help: "",
+    prefix: "",
+    suffix: "",
     rules: [
       {
         required: false,
@@ -448,33 +454,6 @@ export const basicsList = [
       hidden: false, // 是否隐藏，false显示，true隐藏
       showLabel: false,
       hideSequence: false,
-      width: "100%"
-    },
-    model: "",
-    key: "",
-    help: ""
-  },
-  {
-    type: "selectInputList",
-    label: "选择输入列",
-    icon: "icon-biaoge",
-    columns: [
-      {
-        value: "1",
-        label: "选项1",
-        list: []
-      },
-      {
-        value: "2",
-        label: "选项2",
-        list: []
-      }
-    ],
-    options: {
-      disabled: false,
-      multiple: true, // 是否允许多选
-      hidden: false, // 是否隐藏，false显示，true隐藏
-      showLabel: false,
       width: "100%"
     },
     model: "",
@@ -559,10 +538,7 @@ export const basicsList = [
     options: {
       textAlign: "left",
       hidden: false, // 是否隐藏，false显示，true隐藏
-      showRequiredMark: false,
-      color: "rgb(0, 0, 0)",
-      fontFamily: "SimHei",
-      fontSize: "16pt"
+      showRequiredMark: false
     },
     key: ""
   },

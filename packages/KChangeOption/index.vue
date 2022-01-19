@@ -70,7 +70,7 @@ export default {
   methods: {
     handleAdd() {
       // 添加
-      const addData = [
+      let addData = [
         ...this.value,
         {
           value: `${this.value.length + 1}`,
@@ -82,7 +82,7 @@ export default {
     },
     handleAddCol() {
       // 添加栅格Col
-      const addData = [
+      let addData = [
         ...this.value,
         {
           span: 12,
@@ -92,7 +92,7 @@ export default {
       this.$emit("input", addData);
     },
     handleAddRules() {
-      const addData = [
+      let addData = [
         ...this.value,
         {
           pattern: "",

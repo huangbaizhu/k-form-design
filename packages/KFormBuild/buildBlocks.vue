@@ -90,9 +90,7 @@
     <tr v-for="(trItem, trIndex) in record.trs" :key="trIndex">
       <td
         class="table-td"
-        v-for="(tdItem, tdIndex) in trItem.tds.filter(
-          item => item.colspan && item.rowspan
-        )"
+        v-for="(tdItem, tdIndex) in trItem.tds"
         :key="tdIndex"
         :colspan="tdItem.colspan"
         :rowspan="tdItem.rowspan"
@@ -114,7 +112,7 @@
   </table>
 
   <KFormItem
-    v-else-if="!record.options.hidden"
+    v-else
     ref="nestedComponents"
     @handleReset="$emit('handleReset')"
     @change="handleChange"
@@ -171,7 +169,7 @@ export default {
   methods: {
     validationSubform() {
       // 验证动态表格
-      const nestedComponents = this.$refs.nestedComponents;
+      let nestedComponents = this.$refs.nestedComponents;
       if (
         typeof nestedComponents === "object" &&
         nestedComponents instanceof Array
@@ -200,11 +198,10 @@ export default {
     validatorError: {
       deep: true,
       handler: function(n) {
-        const errorItems = Object.keys(n);
+        let errorItems = Object.keys(n);
         if (errorItems.length) {
-          if (!this.record.columns) return false;
           for (let i = 0; i < this.record.columns.length; i++) {
-            const err = this.record.columns[i].list.filter(item =>
+            let err = this.record.columns[i].list.filter(item =>
               errorItems.includes(item.model)
             );
             if (err.length) {

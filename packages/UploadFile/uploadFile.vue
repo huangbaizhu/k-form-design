@@ -3,7 +3,7 @@
  * @Author: kcz
  * @Date: 2020-03-17 12:53:50
  * @LastEditors: kcz
- * @LastEditTime: 2021-05-05 12:12:30
+ * @LastEditTime: 2021-03-03 11:48:54
  -->
 <template>
   <div :style="{ width: record.options.width }">
@@ -82,8 +82,7 @@ export default {
     optionsData() {
       try {
         return JSON.parse(this.record.options.data);
-      } catch (err) {
-        console.error(err);
+      } catch {
         return {};
       }
     }
@@ -129,11 +128,11 @@ export default {
     },
     handlePreview(file) {
       // 下载文件
-      const downloadWay = this.record.options.downloadWay;
-      const dynamicFun = this.record.options.dynamicFun;
+      let downloadWay = this.record.options.downloadWay;
+      let dynamicFun = this.record.options.dynamicFun;
       if (downloadWay === "a") {
         // 使用a标签下载
-        const a = document.createElement("a");
+        let a = document.createElement("a");
         a.href = file.url || file.thumbUrl;
         a.download = file.name;
         a.click();
@@ -196,6 +195,7 @@ export default {
       if (files.length + this.fileList.length > this.record.options.limit) {
         this.$message.warning(`最大上传数量为${this.record.options.limit}`);
         files.splice(this.record.options.limit - this.fileList.length);
+        console.log(files);
       }
     },
     handleChange(info) {
@@ -215,3 +215,11 @@ export default {
   }
 };
 </script>
+
+<style lang="less">
+.hide-upload-drag {
+  .ant-upload.ant-upload-drag {
+    display: none;
+  }
+}
+</style>

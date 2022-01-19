@@ -3,7 +3,7 @@
  * @Author: kcz
  * @Date: 2020-03-27 18:36:56
  * @LastEditors: kcz
- * @LastEditTime: 2021-05-14 14:04:14
+ * @LastEditTime: 2021-03-02 21:31:09
  -->
 <template>
   <a-form-model
@@ -94,7 +94,7 @@ export default {
       return this.record.list.filter(item => !item.options.hidden).length;
     },
     columns() {
-      const columns = [];
+      let columns = [];
       if (!this.record.options.hideSequence) {
         columns.push({
           title: "序号",
@@ -153,7 +153,7 @@ export default {
       }
     },
     copyDomain(record) {
-      const data = {};
+      let data = {};
       this.record.list.forEach(item => {
         data[item.model] = record[item.model];
       });
@@ -164,7 +164,7 @@ export default {
       this.handleInput();
     },
     addDomain() {
-      const data = {};
+      let data = {};
       this.record.list.forEach(item => {
         data[item.model] = item.options.defaultValue;
       });

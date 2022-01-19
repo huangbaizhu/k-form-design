@@ -64,7 +64,7 @@ export default {
     },
     handleCopyJson() {
       // 复制数据
-      const clipboard = new Clipboard(".copy-btn");
+      let clipboard = new Clipboard(".copy-btn");
       clipboard.on("success", () => {
         this.$message.success("复制成功");
       });
